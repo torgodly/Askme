@@ -46,12 +46,14 @@ class Questions extends Page implements HasTable
                             ->required()
                             ->maxLength(255),
                     ])->action(function (array $data, Question $question): void {
+                        $data['is_answered'] = true;
+                        $data['answered_by'] = auth()->id();
                         $question->update($data);
                         Notification::make()
                             ->title('Question Answered')
                             ->success()
                             ->send();
-                    }),
+                    })->disabled(fn(Question $question) => $question->is_answered),
             ])
             ->bulkActions([
                 // ...
