@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->text('body');
+            $table->text('answer')->nullable();
             $table->boolean('is_answered')->default(false);
             $table->foreignId('answered_by')->nullable()->constrained('users');
             $table->timestamps();
