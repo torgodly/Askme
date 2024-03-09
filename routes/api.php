@@ -37,5 +37,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         return response()->json($question, 201);
     });
 
+    //get questions
+    Route::get('questions', function (Request $request) {
+        return response()->json($request->user()->questions);
+    });
+
 
 });
